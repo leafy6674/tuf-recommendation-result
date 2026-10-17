@@ -1,0 +1,23 @@
+/* Page canvas that presents the three result-page options side by side. */
+body{margin:0;background:#18181b;font-family:'Saira',sans-serif}
+a{color:#f97400}
+a:hover{color:#ff8a1a}
+img{display:block}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid #2b2b30;scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}
+.dv-tid{font:600 10px 'Share Tech Mono',monospace;padding:3px 7px;background:#f97400;color:#0a0a0b;text-decoration:none}
+.dv-tname{font:700 18px/1.2 'Saira Condensed',sans-serif;color:#f4f3f4;text-transform:uppercase;letter-spacing:.04em}
+.dv-intro{margin:0 0 24px;max-width:760px;font:14px/1.55 'Saira',sans-serif;color:#c6c2c5}
+.dv-opts{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px}
+.dv-oid{font:600 11px 'Share Tech Mono',monospace;padding:3px 7px;background:#2b2b30;color:#f4f3f4;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 13px/1.3 'Saira',sans-serif;color:#c6c2c5}
+.dv-card{width:1280px;max-width:100%;border:1px solid #2b2b30;overflow:hidden;box-shadow:0 12px 32px rgba(0,0,0,.6)}
+.dv-opt:target .dv-oid{background:#f97400;color:#0a0a0b}
+
+/* Language · currency switch pinned to the top-right corner. */
+.lang-switch{position:fixed;top:16px;right:16px;z-index:50;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.lang-switch__label{font:400 11px/1 'Share Tech Mono',monospace;letter-spacing:.14em;color:#999496}
+.lang-switch__group{display:flex;border:1px solid #55555c;background:#0a0a0b;box-shadow:0 12px 32px rgba(0,0,0,.6)}
+.lang-switch__opt{appearance:none;border:0;border-radius:0;padding:10px 16px;cursor:pointer;font:700 15px/1 'Saira Condensed',sans-serif;letter-spacing:.08em;background:transparent;color:#c6c2c5;transition:background 120ms cubic-bezier(.2,0,0,1)}
+.lang-switch__opt[aria-checked="true"]{background:#f97400;color:#0a0a0b}

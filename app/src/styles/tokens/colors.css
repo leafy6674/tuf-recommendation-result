@@ -1,0 +1,31 @@
+:root{
+/* Hazard — sampled from the stripe tabs on the TUF container artwork (#F97400) */
+--hazard-50:#fff4e8;--hazard-100:#ffe2c2;--hazard-200:#ffc285;--hazard-300:#ffa047;--hazard-400:#ff8a1a;--hazard-500:#f97400;--hazard-600:#d86200;--hazard-700:#a84b00;--hazard-800:#753400;--hazard-900:#3d1b00;
+/* Graphite — the emblem's dark metal */
+--graphite-950:#0a0a0b;--graphite-900:#121214;--graphite-850:#18181b;--graphite-800:#1f1f23;--graphite-700:#2b2b30;--graphite-600:#3a3a40;--graphite-500:#55555c;
+/* Steel — the corrugated container sheet */
+--steel-400:#8a8689;--steel-300:#999496;--steel-200:#c6c2c5;--steel-150:#d6d1d2;--steel-100:#e8e5e6;--steel-50:#f7f6f7;--steel-0:#fdfcfc;
+/* Semantic status */
+--signal-green:#3ccf6e;--signal-red:#ff3b30;--signal-yellow:#ffd21a;--signal-blue:#3d8bff;
+/* RGB accent (keyboard glow seen in product photography) — use sparingly */
+--rgb-cyan:#38d8ff;--rgb-magenta:#c13cff;
+
+/* Semantic aliases — dark (default) */
+--bg-page:var(--graphite-950);
+--surface-1:var(--graphite-900);
+--surface-2:var(--graphite-850);
+--surface-3:var(--graphite-800);
+--surface-inverse:var(--steel-50);
+--border-subtle:var(--graphite-700);
+--border-strong:var(--graphite-500);
+--fg-1:#f4f3f4;
+--fg-2:var(--steel-200);
+--fg-3:var(--steel-400);
+--fg-inverse:var(--graphite-950);
+--accent:var(--hazard-500);
+--accent-hover:var(--hazard-400);
+--accent-press:var(--hazard-600);
+--on-accent:var(--graphite-950);
+--focus-ring:var(--hazard-400);
+--success:var(--signal-green);--danger:var(--signal-red);--warning:var(--signal-yellow);--info:var(--signal-blue);
+}
