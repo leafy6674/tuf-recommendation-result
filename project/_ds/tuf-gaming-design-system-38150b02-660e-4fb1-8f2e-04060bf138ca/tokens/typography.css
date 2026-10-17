@@ -1,0 +1,18 @@
+:root{
+--font-display:'Saira Condensed','Arial Narrow',sans-serif;
+--font-body:'Saira','Helvetica Neue',Arial,sans-serif;
+--font-mono:'Share Tech Mono','Consolas',monospace;
+
+--fs-hero:88px;--fs-h1:64px;--fs-h2:44px;--fs-h3:30px;--fs-h4:22px;
+--fs-lg:18px;--fs-body:16px;--fs-sm:14px;--fs-xs:12px;--fs-label:11px;
+--lh-tight:0.92;/* @kind other */--lh-snug:1.1;/* @kind other */--lh-body:1.55;/* @kind other */
+--tracking-display:0.01em;/* @kind other */--tracking-caps:0.14em;/* @kind other */--tracking-stencil:0.42em;/* @kind other */
+--fw-regular:400;/* @kind font */--fw-medium:500;/* @kind font */--fw-semibold:600;/* @kind font */--fw-bold:700;/* @kind font */--fw-black:800;/* @kind font */
+
+--text-hero:var(--fw-black) var(--fs-hero)/var(--lh-tight) var(--font-display);
+--text-h1:var(--fw-bold) var(--fs-h1)/var(--lh-tight) var(--font-display);
+--text-h2:var(--fw-bold) var(--fs-h2)/var(--lh-snug) var(--font-display);
+--text-h3:var(--fw-semibold) var(--fs-h3)/var(--lh-snug) var(--font-display);
+--text-body:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-body);
+--text-label:var(--fw-regular) var(--fs-label)/1 var(--font-mono);
+}

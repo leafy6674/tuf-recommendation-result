@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/tuf-gaming-design-system-38150b02-660e-4fb1-8f2e-04060bf138ca/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/tuf-gaming-design-system-38150b02-660e-4fb1-8f2e-04060bf138ca/tokens/colors.css">
+<link rel="stylesheet" href="_ds/tuf-gaming-design-system-38150b02-660e-4fb1-8f2e-04060bf138ca/tokens/typography.css">
+<link rel="stylesheet" href="_ds/tuf-gaming-design-system-38150b02-660e-4fb1-8f2e-04060bf138ca/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/tuf-gaming-design-system-38150b02-660e-4fb1-8f2e-04060bf138ca/tokens/effects.css">
+<link rel="stylesheet" href="_ds/tuf-gaming-design-system-38150b02-660e-4fb1-8f2e-04060bf138ca/tokens/base.css">
+<link rel="stylesheet" href="_ds/tuf-gaming-design-system-38150b02-660e-4fb1-8f2e-04060bf138ca/styles.css">
+<script src="_ds/tuf-gaming-design-system-38150b02-660e-4fb1-8f2e-04060bf138ca/_ds_bundle.js"></script>
+<style>body{margin:0;background:#18181b;font-family:'Saira',sans-serif}a{color:#f97400}a:hover{color:#ff8a1a}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid #2b2b30;scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}.dv-tid{font:600 10px 'Share Tech Mono',monospace;padding:3px 7px;background:#f97400;color:#0a0a0b;text-decoration:none}.dv-tname{font:700 18px/1.2 'Saira Condensed',sans-serif;color:#f4f3f4;text-transform:uppercase;letter-spacing:.04em}.dv-intro{margin:0 0 24px;max-width:760px;font:14px/1.55 'Saira',sans-serif;color:#c6c2c5}.dv-opts{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px}.dv-oid{font:600 11px 'Share Tech Mono',monospace;padding:3px 7px;background:#2b2b30;color:#f4f3f4;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 13px/1.3 'Saira',sans-serif;color:#c6c2c5}.dv-card{max-width:100%;border:1px solid #2b2b30;overflow:hidden;box-shadow:0 12px 32px rgba(0,0,0,.6)}.dv-opt:target .dv-oid{background:#f97400;color:#0a0a0b}.dv-next{margin:28px 0 0;font:13px/1.5 'Saira',sans-serif;color:#999496}</style>
+</helmet>
+<div style="position:fixed;top:16px;right:16px;z-index:50;display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+<span style="font:400 11px/1 'Share Tech Mono',monospace;letter-spacing:.14em;color:#999496;">LANGUAGE · CURRENCY</span>
+<div style="display:flex;border:1px solid #55555c;background:#0a0a0b;box-shadow:0 12px 32px rgba(0,0,0,.6);">
+<sc-for list="{{ langOpts }}" as="o" hint-placeholder-count="2">
+<div onClick="{{ o.go }}" style="padding:10px 16px;cursor:pointer;font:700 15px/1 'Saira Condensed',sans-serif;letter-spacing:.08em;background:{{ o.bg }};color:{{ o.fg }};transition:background 120ms cubic-bezier(.2,0,0,1);">{{ o.label }}</div>
+</sc-for>
+</div>
+</div>
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">推薦結果 · Recommendation result — three interaction ideas</span></div>
+<p class="dv-intro">All three pages read the same answers (01–04, budget, screen size) and the same scoring, so editing an answer in one page updates the others. Day content sits on steel, Night on graphite, as in the requirements map. Specs, FPS and prices are placeholders.</p>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Tier board — ranked comparison table; edit answers in the sidebar to re-rank</div>
+<div class="dv-card" style="width:1280px;background:var(--graphite-950);color:var(--fg-1);font-family:var(--font-body);">
+<div style="height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid var(--graphite-700);background:var(--graphite-900);">
+<div style="display:flex;align-items:center;gap:20px;"><span style="font:800 28px/1 var(--font-display);letter-spacing:.02em;">TUF</span><span style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);">{{ L.crumbReq }} <span style="color:var(--hazard-500);">{{ L.result }}</span></span></div>
+<x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Button" variant="ghost" size="sm" on-click="{{ reset }}" hint-size="140px,36px">{{ L.retake }}</x-import>
+</div>
+<div style="display:grid;grid-template-columns:320px minmax(0,1fr);">
+<div style="border-right:1px solid var(--graphite-700);padding:28px 24px;display:flex;flex-direction:column;gap:16px;background:var(--graphite-900);">
+<div>
+<div style="font:400 13px/1 var(--font-mono);letter-spacing:.18em;color:var(--hazard-500);">{{ L.answers }}</div>
+<div style="font-size:13px;color:var(--fg-3);margin-top:8px;">{{ L.clickRerank }}</div>
+</div>
+<div style="border:1px solid var(--graphite-700);background:var(--graphite-950);padding:16px;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;align-items:center;gap:8px;font:700 18px/1 var(--font-display);"><span style="width:10px;height:10px;border:1px solid var(--hazard-500);transform:rotate(45deg);box-sizing:border-box;"></span>{{ L.nightGroup }}</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-500);">{{ L.q1 }}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ gameTags }}" as="t" hint-placeholder-count="8"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-500);">{{ L.q2 }}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ fpsTags }}" as="t" hint-placeholder-count="4"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div>
+</div>
+</div>
+<div style="border:1px solid var(--steel-150);background:var(--steel-50);color:var(--graphite-950);padding:16px;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;align-items:center;gap:8px;font:700 18px/1 var(--font-display);"><span style="width:10px;height:10px;background:var(--graphite-950);transform:rotate(45deg);"></span>{{ L.dayGroup }}</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-700);">{{ L.q3 }}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ platTagsL }}" as="t" hint-placeholder-count="8"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-700);">{{ L.q4 }}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ localTagsL }}" as="t" hint-placeholder-count="2"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div>
+<sc-if value="{{ showLm }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ lmTagsL }}" as="t" hint-placeholder-count="4"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div></sc-if>
+</div>
+</div>
+<div style="border:1px solid var(--graphite-700);background:var(--graphite-950);padding:16px;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);">{{ L.budget }}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ budgetTags }}" as="t" hint-placeholder-count="4"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);">{{ L.screen }}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ screenTags }}" as="t" hint-placeholder-count="3"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div>
+</div>
+</div>
+</div>
+
+<div style="padding:28px 32px 32px;display:flex;flex-direction:column;gap:20px;min-width:0;">
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;">
+<div>
+<div style="font:400 13px/1 var(--font-mono);letter-spacing:.18em;color:var(--hazard-500);">{{ L.cands }}</div>
+<div style="font:800 56px/.92 var(--font-display);text-transform:uppercase;margin-top:10px;">{{ L.pickRig }}</div>
+</div>
+<div style="display:flex;gap:16px;font:400 12px/1 var(--font-mono);color:var(--fg-2);">
+<div style="display:flex;align-items:center;gap:6px;"><span style="width:9px;height:9px;background:var(--signal-green);transform:rotate(45deg);"></span>{{ L.pass }}</div>
+<div style="display:flex;align-items:center;gap:6px;"><span style="width:9px;height:9px;border:1.5px solid var(--hazard-500);transform:rotate(45deg);box-sizing:border-box;"></span>{{ L.part }}</div>
+<div style="display:flex;align-items:center;gap:6px;"><span style="width:9px;height:9px;border:1.5px solid var(--signal-red);transform:rotate(45deg);box-sizing:border-box;"></span>{{ L.fail }}</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;">
+<div style="display:grid;grid-template-columns:200px repeat(4,minmax(0,1fr));gap:8px;padding-bottom:12px;">
+<div style="display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding-bottom:4px;font:400 11px/1.5 var(--font-mono);letter-spacing:.1em;color:var(--fg-3);"><span>{{ L.drivenBy }}</span><div style="display:flex;gap:4px;"><span style="padding:1px 5px;border:1px solid var(--hazard-500);color:var(--hazard-500);">{{ L.nS }}</span><span style="padding:1px 5px;background:var(--steel-0);color:var(--graphite-950);">{{ L.dS }}</span><span style="padding:1px 5px;border:1px solid var(--graphite-500);color:var(--fg-2);">{{ L.gS }}</span></div></div>
+<sc-for list="{{ aCols }}" as="c" hint-placeholder-count="4">
+<div onClick="{{ c.pick }}" style="position:relative;padding:16px 14px;border:1px solid {{ c.headBd }};background:var(--graphite-900);display:flex;flex-direction:column;gap:10px;cursor:pointer;min-width:0;transition:border-color 120ms;">
+<div style="position:absolute;left:-1px;right:-1px;top:-1px;height:3px;background:{{ c.headTop }};"></div>
+<div style="display:flex;justify-content:space-between;align-items:center;min-height:22px;"><span style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);">{{ c.rank }}</span><sc-if value="{{ c.top }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Badge" hint-size="80px,22px">Top pick</x-import></sc-if></div>
+<div style="height:84px;background:radial-gradient(ellipse at 50% 60%,var(--graphite-700),transparent 70%);display:flex;align-items:center;justify-content:center;"><img src="assets/laptop-front.png" alt="" style="max-height:76px;max-width:88%;object-fit:contain;"></div>
+<div style="font:700 20px/1.05 var(--font-display);text-transform:uppercase;">{{ c.name }}</div>
+<div style="display:flex;flex-direction:column;gap:2px;"><span style="font:600 15px/1.2 var(--font-body);">{{ c.price }}</span><sc-if value="{{ c.over }}" hint-placeholder-val="{{ false }}"><span style="font:400 12px/1.2 var(--font-mono);color:var(--signal-red);">{{ c.overText }}</span></sc-if></div>
+<div style="display:flex;align-items:baseline;gap:6px;"><span style="font:800 40px/1 var(--font-display);color:{{ c.pctCol }};">{{ c.pct }}</span><span style="font:400 11px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);">% MATCH</span></div>
+<div style="height:4px;background:var(--graphite-700);"><div style="height:4px;width:{{ c.barW }};background:var(--hazard-500);transition:width 420ms var(--ease-out);"></div></div>
+<x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Button" dc-props="{{ c.btn }}" hint-size="100%,36px">{{ c.btnLabel }}</x-import>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--graphite-850);border-top:1px solid var(--graphite-700);font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-500);">{{ L.secNight }} <span style="color:var(--fg-3);">01 · 02</span></div>
+<sc-for list="{{ aNight }}" as="r" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:200px repeat(4,minmax(0,1fr));border-bottom:1px solid var(--graphite-700);">
+<div style="padding:12px;display:flex;flex-direction:column;gap:6px;min-width:0;">
+<div style="font:600 16px/1.2 var(--font-display);">{{ r.label }}</div>
+<div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;"><span style="font:400 11px/1 var(--font-mono);color:var(--fg-3);margin-right:2px;">{{ r.sub }}</span><sc-for list="{{ r.n }}" as="x" hint-placeholder-count="0"><span style="font:400 11px/1 var(--font-mono);padding:2px 5px;border:1px solid var(--hazard-500);color:var(--hazard-500);">{{ x.t }}</span></sc-for><sc-for list="{{ r.d }}" as="x" hint-placeholder-count="0"><span style="font:400 11px/1 var(--font-mono);padding:2px 5px;border:1px solid var(--steel-0);background:var(--steel-0);color:var(--graphite-950);">{{ x.t }}</span></sc-for></div>
+</div>
+<sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="4">
+<div style="padding:12px 14px;display:flex;gap:10px;align-items:flex-start;background:{{ c.selBg }};min-width:0;">
+<span style="width:9px;height:9px;flex:none;margin-top:6px;transform:rotate(45deg);box-sizing:border-box;background:{{ c.mkBg }};border:1.5px solid {{ c.mkBd }};"></span>
+<div style="min-width:0;"><div style="font:500 15px/1.3 var(--font-body);">{{ c.text }}</div><div style="font:400 12px/1.3 var(--font-body);color:var(--fg-3);">{{ c.sub }}</div></div>
+</div>
+</sc-for>
+</div>
+</sc-for>
+
+<div style="background:var(--steel-50);color:var(--graphite-950);margin-top:12px;">
+<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--steel-100);border-bottom:1px solid var(--steel-150);font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-700);">{{ L.secDay }} <span style="color:var(--graphite-500);">03 · 04</span></div>
+<sc-for list="{{ aDay }}" as="r" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:200px repeat(4,minmax(0,1fr));border-bottom:1px solid var(--steel-150);">
+<div style="padding:12px;display:flex;flex-direction:column;gap:6px;min-width:0;">
+<div style="font:600 16px/1.2 var(--font-display);">{{ r.label }}</div>
+<div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;"><span style="font:400 11px/1 var(--font-mono);color:var(--graphite-500);margin-right:2px;">{{ r.sub }}</span><sc-for list="{{ r.n }}" as="x" hint-placeholder-count="0"><span style="font:400 11px/1 var(--font-mono);padding:2px 5px;border:1px solid var(--hazard-700);color:var(--hazard-700);">{{ x.t }}</span></sc-for><sc-for list="{{ r.d }}" as="x" hint-placeholder-count="0"><span style="font:400 11px/1 var(--font-mono);padding:2px 5px;border:1px solid var(--graphite-950);background:var(--graphite-950);color:var(--steel-0);">{{ x.t }}</span></sc-for></div>
+</div>
+<sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="4">
+<div style="padding:12px 14px;display:flex;gap:10px;align-items:flex-start;background:{{ c.selBg }};min-width:0;">
+<span style="width:9px;height:9px;flex:none;margin-top:6px;transform:rotate(45deg);box-sizing:border-box;background:{{ c.mkBg }};border:1.5px solid {{ c.mkBd }};"></span>
+<div style="min-width:0;"><div style="font:500 15px/1.3 var(--font-body);">{{ c.text }}</div><div style="font:400 12px/1.3 var(--font-body);color:var(--graphite-600);">{{ c.sub }}</div></div>
+</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-top:12px;background:var(--graphite-850);border-top:1px solid var(--graphite-700);font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-2);">{{ L.secGen }}</div>
+<sc-for list="{{ aGen }}" as="r" hint-placeholder-count="2">
+<div style="display:grid;grid-template-columns:200px repeat(4,minmax(0,1fr));border-bottom:1px solid var(--graphite-700);">
+<div style="padding:12px;display:flex;flex-direction:column;gap:6px;"><div style="font:600 16px/1.2 var(--font-display);">{{ r.label }}</div><span style="font:400 11px/1 var(--font-mono);color:var(--fg-3);">{{ r.sub }}</span></div>
+<sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="4">
+<div style="padding:12px 14px;display:flex;gap:10px;align-items:flex-start;background:{{ c.selBg }};min-width:0;">
+<span style="width:9px;height:9px;flex:none;margin-top:6px;transform:rotate(45deg);box-sizing:border-box;background:{{ c.mkBg }};border:1.5px solid {{ c.mkBd }};"></span>
+<div style="min-width:0;"><div style="font:500 15px/1.3 var(--font-body);">{{ c.text }}</div><div style="font:400 12px/1.3 var(--font-body);color:var(--fg-3);">{{ c.sub }}</div></div>
+</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+<x-import component-from-global-scope="TUFGamingDesignSystem_38150b.HazardStripe" thickness="8" hint-size="100%,8px"></x-import>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:18px 32px;background:var(--graphite-900);">
+<div style="display:flex;align-items:baseline;gap:16px;"><span style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);">{{ L.selected }}</span><span style="font:700 26px/1 var(--font-display);text-transform:uppercase;">{{ aSelName }}</span><span style="font:600 18px/1 var(--font-body);color:var(--fg-2);">{{ aSelPrice }}</span></div>
+<div style="display:flex;gap:12px;"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Button" variant="outline" hint-size="160px,44px">{{ L.fullSpecs }}</x-import><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Button" hint-size="180px,44px">{{ L.addCart }}</x-import></div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Two shifts — one rig at a time; flip Day / Night to see AI fit or game FPS</div>
+<div class="dv-card" style="width:1280px;background:{{ b.bg }};color:{{ b.fg }};font-family:var(--font-body);transition:background 200ms var(--ease-hard),color 200ms var(--ease-hard);">
+<div style="height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid {{ b.bd }};background:{{ b.panel }};transition:background 200ms var(--ease-hard);">
+<div style="display:flex;align-items:center;gap:20px;"><span style="font:800 28px/1 var(--font-display);letter-spacing:.02em;">TUF</span><span style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:{{ b.mute }};">{{ L.resultEyebrow }}</span></div>
+<div style="display:flex;border:1px solid {{ b.bd }};">
+<sc-for list="{{ bShifts }}" as="x" hint-placeholder-count="2">
+<div onClick="{{ x.go }}" style="min-width:180px;padding:9px 20px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;background:{{ x.bg }};color:{{ x.fg }};transition:background 120ms var(--ease-hard);"><span style="font:700 18px/1 var(--font-display);letter-spacing:.06em;">{{ x.label }}</span><span style="font:400 11px/1 var(--font-mono);letter-spacing:.08em;">{{ x.sub }}</span></div>
+</sc-for>
+</div>
+<span style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:{{ b.mute }};width:200px;text-align:right;">{{ L.switchShift }}</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:{{ b.bd }};border-bottom:1px solid {{ b.bd }};">
+<sc-for list="{{ bRail }}" as="m" hint-placeholder-count="4">
+<div onClick="{{ m.go }}" style="position:relative;padding:14px 20px;background:{{ m.bg }};cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;">
+<div style="position:absolute;left:0;right:0;top:0;height:3px;background:{{ m.top }};"></div>
+<div style="display:flex;flex-direction:column;gap:5px;min-width:0;"><span style="font:400 11px/1 var(--font-mono);letter-spacing:.14em;color:{{ b.mute }};">{{ m.rank }} · {{ m.price }}</span><span style="font:700 18px/1 var(--font-display);text-transform:uppercase;color:{{ m.fg }};">{{ m.name }}</span></div>
+<span style="font:800 26px/1 var(--font-display);color:{{ m.fg }};">{{ m.pct }}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:40px;padding:40px;">
+<div style="position:relative;aspect-ratio:1/0.72;background:{{ b.stage }};border:1px solid {{ b.bd }};display:flex;align-items:center;justify-content:center;clip-path:var(--clip-chamfer-tr);">
+<x-import component-from-global-scope="TUFGamingDesignSystem_38150b.HazardStripe" orientation="vertical" thickness="14" length="70" style="position:absolute;left:0;top:0;" hint-size="14px,70px"></x-import>
+<img src="assets/laptop-front.png" alt="" style="width:80%;">
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;min-width:0;">
+<sc-if value="{{ b.isDay }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font:400 13px/1 var(--font-mono);letter-spacing:.18em;color:var(--hazard-700);">{{ L.dayShiftEyebrow }}</div>
+<div style="font:800 60px/.92 var(--font-display);margin-top:12px;color:var(--graphite-950);-webkit-text-stroke:6px var(--signal-yellow);paint-order:stroke fill;letter-spacing:.04em;transform:skewX(-8deg);transform-origin:left bottom;">{{ L.dawn }}</div>
+</div>
+</sc-if>
+<sc-if value="{{ b.isNight }}" hint-placeholder-val="{{ true }}">
+<div>
+<div style="font:400 13px/1 var(--font-mono);letter-spacing:.18em;color:var(--hazard-500);">{{ L.nightShiftEyebrow }}</div>
+<div style="font:800 60px/.92 var(--font-display);margin-top:12px;color:var(--steel-100);letter-spacing:.14em;text-shadow:0 10px 18px rgba(255,59,48,.4);transform:skewX(8deg);transform-origin:left bottom;">{{ L.reaper }}</div>
+</div>
+</sc-if>
+<div style="font:800 44px/1 var(--font-display);text-transform:uppercase;">{{ b.name }}</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:{{ b.bd }};border:1px solid {{ b.bd }};">
+<div style="background:{{ b.panel }};padding:14px 16px;"><div style="font:400 11px/1 var(--font-mono);letter-spacing:.14em;color:{{ b.mute }};">{{ L.match }}</div><div style="font:800 40px/1 var(--font-display);margin-top:8px;">{{ b.match }}<span style="font-size:20px;">%</span></div></div>
+<div style="background:{{ b.panel }};padding:14px 16px;"><div style="font:400 11px/1 var(--font-mono);letter-spacing:.14em;color:{{ b.mute }};">{{ L.dayFit }}</div><div style="font:800 40px/1 var(--font-display);margin-top:8px;color:{{ b.dayCol }};">{{ b.dayPct }}</div></div>
+<div style="background:{{ b.panel }};padding:14px 16px;"><div style="font:400 11px/1 var(--font-mono);letter-spacing:.14em;color:{{ b.mute }};">{{ L.nightFit }}</div><div style="font:800 40px/1 var(--font-display);margin-top:8px;color:{{ b.nightCol }};">{{ b.nightPct }}</div></div>
+</div>
+<div style="display:flex;flex-direction:column;">
+<sc-for list="{{ b.stats }}" as="x" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:140px 1fr;padding:11px 0;border-bottom:1px solid {{ b.bd }};"><span style="font:400 12px/1.6 var(--font-mono);letter-spacing:.12em;color:{{ b.mute }};">{{ x.k }}</span><span style="font:500 16px/1.4 var(--font-body);">{{ x.v }}</span></div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<sc-if value="{{ b.isNight }}" hint-placeholder-val="{{ true }}">
+<div style="margin:0 40px 40px;border:1px solid var(--graphite-700);background:var(--graphite-900);clip-path:var(--clip-chamfer-tr);">
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:20px 24px;border-bottom:1px solid var(--graphite-700);">
+<div><div style="font:400 13px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-500);">{{ L.fpsEyebrow }}</div><div style="font:700 28px/1.1 var(--font-display);margin-top:6px;">{{ L.fpsTitle }} · {{ b.pass }}</div></div>
+<div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;"><span style="font:400 11px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);">{{ L.target }}</span><div style="display:flex;gap:6px;"><sc-for list="{{ fpsTags }}" as="t" hint-placeholder-count="4"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div></div>
+</div>
+<div style="padding:16px 24px;border-bottom:1px solid var(--graphite-700);display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ gameTags }}" as="t" hint-placeholder-count="8"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div>
+<sc-if value="{{ b.hasGames }}" hint-placeholder-val="{{ true }}">
+<div style="position:relative;padding:20px 24px 12px;">
+<div style="position:absolute;top:8px;bottom:0;left:264px;right:136px;pointer-events:none;">
+<div style="position:absolute;top:0;bottom:0;left:{{ b.tLeft }};width:2px;background:var(--hazard-500);transition:left 200ms var(--ease-hard);"><span style="position:absolute;bottom:100%;left:6px;font:400 11px/1 var(--font-mono);color:var(--hazard-500);white-space:nowrap;">▼ {{ b.fps }} FPS</span></div>
+</div>
+<sc-for list="{{ b.bars }}" as="g" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:240px minmax(0,1fr) 136px;align-items:center;padding:10px 0;">
+<div style="display:flex;flex-direction:column;gap:3px;padding-right:12px;"><span style="font:600 17px/1.15 var(--font-display);">{{ g.label }}</span><span style="font:400 11px/1 var(--font-mono);letter-spacing:.08em;color:{{ g.noteCol }};">{{ g.note }}</span></div>
+<div style="height:16px;background:var(--graphite-700);"><div style="height:16px;width:{{ g.w }};background:{{ g.col }};transition:width 420ms var(--ease-out);"></div></div>
+<div style="padding-left:16px;display:flex;align-items:baseline;gap:4px;"><span style="font:800 28px/1 var(--font-display);">{{ g.v }}</span><span style="font:400 11px/1 var(--font-mono);color:var(--fg-3);">FPS</span></div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ b.noGames }}" hint-placeholder-val="{{ false }}"><div style="padding:32px 24px;color:var(--fg-3);">{{ L.noGames }}</div></sc-if>
+<div style="display:flex;align-items:center;gap:10px;padding:14px 24px;border-top:1px solid var(--graphite-700);font-size:14px;color:var(--fg-2);"><span style="width:9px;height:9px;transform:rotate(45deg);box-sizing:border-box;background:{{ b.hzBg }};border:1.5px solid {{ b.hzBd }};"></span>{{ b.hzText }}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ b.isDay }}" hint-placeholder-val="{{ false }}">
+<div style="margin:0 40px 40px;border:1px solid var(--steel-150);background:var(--steel-0);color:var(--graphite-950);clip-path:var(--clip-chamfer-tr);">
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:20px 24px;border-bottom:1px solid var(--steel-150);">
+<div><div style="font:400 13px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-700);">{{ L.vramEyebrow }}</div><div style="font:700 28px/1.1 var(--font-display);margin-top:6px;">{{ L.vramTitle }}</div></div>
+<div style="display:flex;gap:6px;"><sc-for list="{{ localTagsL }}" as="t" hint-placeholder-count="2"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div>
+</div>
+<sc-if value="{{ showLm }}" hint-placeholder-val="{{ true }}">
+<div style="padding:16px 24px;border-bottom:1px solid var(--steel-150);display:flex;flex-wrap:wrap;gap:6px;align-items:center;"><sc-for list="{{ lmTagsL }}" as="t" hint-placeholder-count="4"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for><span style="font:400 11px/1 var(--font-mono);letter-spacing:.08em;color:var(--graphite-500);margin-left:8px;">{{ L.runtime }}</span></div>
+<div style="position:relative;padding:28px 24px 8px;">
+<div style="position:absolute;top:10px;bottom:30px;left:264px;right:144px;pointer-events:none;">
+<div style="position:absolute;top:0;bottom:0;left:{{ b.capLeft }};width:2px;background:var(--hazard-700);transition:left 200ms var(--ease-hard);"><span style="position:absolute;bottom:100%;left:6px;font:400 11px/1 var(--font-mono);color:var(--hazard-700);white-space:nowrap;">▼ {{ b.vram }}GB VRAM</span></div>
+</div>
+<sc-for list="{{ b.lm }}" as="l" hint-placeholder-count="2">
+<div style="display:grid;grid-template-columns:240px minmax(0,1fr) 144px;align-items:center;padding:10px 0;">
+<div style="display:flex;flex-direction:column;gap:3px;padding-right:12px;"><span style="font:600 17px/1.15 var(--font-display);">{{ l.label }}</span><span style="font:400 11px/1 var(--font-mono);letter-spacing:.06em;color:var(--graphite-500);">{{ l.q4 }} · {{ l.q8 }}</span></div>
+<div style="display:flex;flex-direction:column;gap:3px;background:var(--steel-100);padding:3px 0;">
+<div style="height:8px;width:{{ l.q8w }};background:var(--steel-300);"></div>
+<div style="height:8px;width:{{ l.q4w }};background:var(--graphite-800);"></div>
+</div>
+<div style="padding-left:16px;font:700 18px/1 var(--font-display);color:{{ l.stCol }};">{{ l.status }}</div>
+</div>
+</sc-for>
+<div style="display:grid;grid-template-columns:240px minmax(0,1fr) 144px;padding-top:6px;"><span style="font:400 11px/1 var(--font-mono);color:var(--graphite-500);display:flex;gap:12px;align-items:center;"><span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:6px;background:var(--graphite-800);"></span>Q4</span><span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:6px;background:var(--steel-300);"></span>Q8</span></span><div style="display:flex;justify-content:space-between;font:400 11px/1 var(--font-mono);color:var(--graphite-500);"><span>0</span><span>4</span><span>8</span><span>12</span><span>16GB</span></div><span></span></div>
+</div>
+</sc-if>
+<sc-if value="{{ b.noLocal }}" hint-placeholder-val="{{ false }}"><div style="padding:28px 24px;color:var(--graphite-600);">{{ L.noLocal }}</div></sc-if>
+<div style="padding:20px 24px;border-top:1px solid var(--steel-150);display:flex;flex-direction:column;gap:12px;">
+<div style="font:400 13px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-700);">{{ L.q3 }}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ platTagsL }}" as="t" hint-placeholder-count="8"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Tag" dc-props="{{ t.props }}" hint-size="auto,26px">{{ t.label }}</x-import></sc-for></div>
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--steel-150);border:1px solid var(--steel-150);margin-top:4px;">
+<sc-for list="{{ b.checks }}" as="x" hint-placeholder-count="4">
+<div style="background:var(--steel-50);padding:12px 14px;display:flex;gap:10px;align-items:flex-start;"><span style="width:9px;height:9px;flex:none;margin-top:5px;transform:rotate(45deg);box-sizing:border-box;background:{{ x.mkBg }};border:1.5px solid {{ x.mkBd }};"></span><div><div style="font:400 11px/1 var(--font-mono);letter-spacing:.12em;color:var(--graphite-500);">{{ x.k }}</div><div style="font:600 15px/1.3 var(--font-body);margin-top:5px;">{{ x.v }}</div><div style="font-size:12px;color:var(--graphite-600);">{{ x.sub }}</div></div></div>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+<div style="display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-top:1px solid {{ b.bd }};background:{{ b.panel }};">
+<div style="display:flex;align-items:baseline;gap:14px;"><span style="font:800 40px/1 var(--font-display);">{{ b.price }}</span><span style="font:400 12px/1 var(--font-mono);color:{{ b.overCol }};">{{ b.overText }}</span></div>
+<div style="display:flex;gap:12px;"><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Button" dc-props="{{ b.altBtn }}" hint-size="200px,52px">{{ b.altLabel }}</x-import><x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Button" size="lg" hint-size="200px,52px">{{ L.selectRig }}</x-import></div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Balance — slide Day ↔ Night priority and budget; rows re-rank live; pin two to compare</div>
+<div class="dv-card" style="width:1280px;position:relative;background:linear-gradient(90deg,var(--steel-100) 50%,var(--graphite-900) 50%);color:var(--fg-1);font-family:var(--font-body);">
+<div style="position:absolute;left:calc(50% - 1px);top:64px;bottom:0;width:2px;background:var(--hazard-500);"></div>
+<div style="position:relative;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid var(--graphite-700);background:var(--graphite-950);">
+<div style="display:flex;align-items:center;gap:20px;"><span style="font:800 28px/1 var(--font-display);letter-spacing:.02em;">TUF</span><span style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);">{{ L.resultEyebrow }} · <span style="color:var(--hazard-500);">{{ L.balance }}</span></span></div>
+<x-import component-from-global-scope="TUFGamingDesignSystem_38150b.Button" variant="ghost" size="sm" on-click="{{ reset }}" hint-size="140px,36px">{{ L.retake }}</x-import>
+</div>
+
+<div style="position:relative;display:flex;flex-direction:column;align-items:center;padding:40px 0 16px;">
+<div style="width:720px;border:1px solid var(--hazard-500);background:var(--graphite-950);clip-path:var(--clip-chamfer-tr);">
+<div style="background:var(--hazard-500);color:var(--graphite-950);padding:14px 24px;text-align:center;"><div style="font:400 12px/1 var(--font-mono);letter-spacing:.18em;">{{ L.twoShifts }}</div><div style="font:800 40px/1 var(--font-display);margin-top:6px;">{{ L.whichShift }}</div></div>
+<div style="padding:20px 28px 24px;display:flex;flex-direction:column;gap:20px;">
+<div style="display:flex;flex-direction:column;gap:10px;">
+<div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font:700 22px/1 var(--font-display);">{{ L.dawn }} <span style="color:var(--steel-0);">{{ cWDay }}%</span></span><span style="font:400 11px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);">{{ L.priority }}</span><span style="font:700 22px/1 var(--font-display);"><span style="color:var(--hazard-500);">{{ cWNight }}%</span> {{ L.reaper }}</span></div>
+<input type="range" min="0" max="100" step="5" value="{{ cWDay }}" onChange="{{ cOnW }}" style="width:100%;accent-color:#f97400;direction:rtl;cursor:pointer;">
+<div style="display:flex;justify-content:space-between;font:400 11px/1 var(--font-mono);letter-spacing:.1em;color:var(--fg-3);"><span>{{ L.leanDay }}</span><span>{{ L.leanNight }}</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px solid var(--graphite-700);">
+<div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font:400 11px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);">{{ L.budgetCap }}</span><span style="font:700 22px/1 var(--font-display);">{{ cBudgetText }}</span></div>
+<input type="range" min="{{ cMin }}" max="{{ cMax }}" step="{{ cStep }}" value="{{ cBudget }}" onChange="{{ cOnB }}" style="width:100%;accent-color:#f97400;cursor:pointer;">
+</div>
+</div>
+</div>
+</div>
+
+<div style="position:relative;display:grid;grid-template-columns:1fr 1fr;padding:16px 0 8px;">
+<div style="text-align:right;padding-right:150px;font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-700);">{{ L.dayFit }} ←</div>
+<div style="padding-left:150px;font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-500);">→ {{ L.nightFit }}</div>
+</div>
+<div style="position:relative;height:416px;">
+<sc-for list="{{ cRows }}" as="r" hint-placeholder-count="4">
+<div style="position:absolute;left:0;right:0;top:{{ r.top }};height:96px;transition:top 420ms var(--ease-out);">
+<div style="position:absolute;right:calc(50% + 130px);top:24px;height:26px;width:{{ r.dayTrackW }};background:var(--steel-200);transition:width 420ms var(--ease-out);"></div>
+<div style="position:absolute;right:calc(50% + 130px);top:24px;height:26px;width:{{ r.dayW }};background:var(--graphite-800);transition:width 420ms var(--ease-out);"></div>
+<div style="position:absolute;right:calc(50% + 130px);top:58px;font:400 12px/1 var(--font-mono);letter-spacing:.06em;color:var(--graphite-700);white-space:nowrap;">{{ r.dayLabel }}</div>
+<div style="position:absolute;left:calc(50% + 130px);top:24px;height:26px;width:{{ r.nightTrackW }};background:var(--graphite-700);transition:width 420ms var(--ease-out);"></div>
+<div style="position:absolute;left:calc(50% + 130px);top:24px;height:26px;width:{{ r.nightW }};background:var(--hazard-500);transition:width 420ms var(--ease-out);"></div>
+<div style="position:absolute;left:calc(50% + 130px);top:58px;font:400 12px/1 var(--font-mono);letter-spacing:.06em;color:var(--fg-2);white-space:nowrap;">{{ r.nightLabel }}</div>
+<div onClick="{{ r.go }}" style="position:absolute;left:calc(50% - 120px);width:240px;top:4px;height:80px;box-sizing:border-box;padding:10px 14px;background:{{ r.pillBg }};color:{{ r.pillFg }};border:1px solid {{ r.pillBd }};cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;clip-path:var(--clip-chamfer-sm);transition:background 120ms var(--ease-hard);">
+<div style="display:flex;justify-content:space-between;align-items:center;"><span style="font:400 11px/1 var(--font-mono);letter-spacing:.14em;">{{ r.rank }} {{ r.pickTag }}</span><span style="font:800 26px/1 var(--font-display);">{{ r.pct }}%</span></div>
+<div style="font:700 19px/1 var(--font-display);text-transform:uppercase;">{{ r.name }}</div>
+<div style="font:400 11px/1 var(--font-mono);color:{{ r.priceCol }};">{{ r.priceLine }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="position:relative;text-align:center;padding:4px 0 28px;"><span style="font:400 11px/1 var(--font-mono);letter-spacing:.14em;color:var(--fg-3);background:var(--graphite-950);padding:6px 12px;border:1px solid var(--graphite-700);">{{ L.clickTwo }}</span></div>
+
+<x-import component-from-global-scope="TUFGamingDesignSystem_38150b.HazardStripe" thickness="8" style="position:relative;" hint-size="100%,8px"></x-import>
+<sc-if value="{{ cHasDiff }}" hint-placeholder-val="{{ true }}">
+<div style="position:relative;padding:28px 0 36px;">
+<div style="display:grid;grid-template-columns:1fr 200px 1fr;align-items:end;padding-bottom:12px;">
+<div style="text-align:right;padding-right:28px;color:var(--graphite-950);"><div style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-700);">A</div><div style="font:800 34px/1 var(--font-display);text-transform:uppercase;margin-top:6px;">{{ cAName }}</div></div>
+<div style="text-align:center;"><span style="font:800 22px/1 var(--font-display);background:var(--hazard-500);color:var(--graphite-950);padding:6px 14px;">VS</span></div>
+<div style="padding-left:28px;"><div style="font:400 12px/1 var(--font-mono);letter-spacing:.14em;color:var(--hazard-500);">B</div><div style="font:800 34px/1 var(--font-display);text-transform:uppercase;margin-top:6px;">{{ cBName }}</div></div>
+</div>
+<sc-for list="{{ cDiff }}" as="d" hint-placeholder-count="7">
+<div style="display:grid;grid-template-columns:1fr 200px 1fr;align-items:center;opacity:{{ d.op }};">
+<div style="display:flex;justify-content:flex-end;align-items:center;gap:10px;padding:10px 28px;border-bottom:1px solid var(--steel-200);color:var(--graphite-950);font:500 16px/1.3 var(--font-body);"><span style="width:9px;height:9px;transform:rotate(45deg);background:{{ d.aMk }};"></span>{{ d.a }}</div>
+<div style="text-align:center;font:400 11px/1 var(--font-mono);letter-spacing:.12em;color:var(--fg-2);background:var(--graphite-950);padding:12px 0;border-bottom:1px solid var(--graphite-700);">{{ d.k }}</div>
+<div style="display:flex;align-items:center;gap:10px;padding:10px 28px;border-bottom:1px solid var(--graphite-700);font:500 16px/1.3 var(--font-body);">{{ d.b }}<span style="width:9px;height:9px;transform:rotate(45deg);background:{{ d.bMk }};"></span></div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ cNoDiff }}" hint-placeholder-val="{{ false }}"><div style="position:relative;display:grid;grid-template-columns:1fr 1fr;padding:40px 0;"><div style="text-align:right;padding-right:28px;color:var(--graphite-600);">{{ L.pickOne }}</div><div style="padding-left:28px;color:var(--fg-3);">{{ L.picked }} {{ cPickCount }} / 2</div></div></sc-if>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "<a class="dv-oid" href="#1a">1a</a> table with the Day/Night flip from <a class="dv-oid" href="#1b">1b</a>" · "put the <a class="dv-oid" href="#1c">1c</a> priority slider into the <a class="dv-oid" href="#1a">1a</a> sidebar" · "add a cart / checkout step"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  static D = {
+    models: [
+      { id: 'a14', name: 'TUF Gaming A14', cpu: 'Ryzen AI 7 350', cores: 8, gpu: 'RTX 5060', idx: 1.0, vram: 8, ram: 32, ssd: '1TB', screen: 14, panel: '2.5K 165Hz', hz: 165, weight: 1.46, tgp: '100W', price: 46900, usd: 1499 },
+      { id: 'f16', name: 'TUF Gaming F16', cpu: 'Core i7-14650HX', cores: 16, gpu: 'RTX 5060', idx: 1.05, vram: 8, ram: 16, ssd: '1TB', screen: 16, panel: '2.5K 165Hz', hz: 165, weight: 2.2, tgp: '115W', price: 42900, usd: 1349 },
+      { id: 'a16', name: 'TUF Gaming A16', cpu: 'Ryzen 9 8940HX', cores: 16, gpu: 'RTX 5070', idx: 1.22, vram: 8, ram: 32, ssd: '1TB', screen: 16, panel: '2.5K 165Hz', hz: 165, weight: 2.2, tgp: '115W', price: 52900, usd: 1649 },
+      { id: 'a18', name: 'TUF Gaming A18', cpu: 'Ryzen 9 8940HX', cores: 16, gpu: 'RTX 5070 Ti', idx: 1.5, vram: 12, ram: 32, ssd: '2TB', screen: 18, panel: '2.5K 240Hz', hz: 240, weight: 2.8, tgp: '140W', price: 64900, usd: 1999 }
+    ],
+    games: [
+      { id: 'cp', label: 'Cyberpunk 2077', base: 55 },
+      { id: 'er', label: 'Elden Ring', base: 62, cap: 60 },
+      { id: 'rdr', label: 'Red Dead Redemption 2', base: 62 },
+      { id: 'w3', label: 'The Witcher 3', base: 85 },
+      { id: 'gta', label: 'GTA V', base: 140 },
+      { id: 'bm', label: '黑神話：悟空', en: 'Black Myth: Wukong', base: 48 },
+      { id: 'cs', label: 'Counter-Strike 2', base: 220 },
+      { id: 'hl', label: 'Half-Life 2', base: 300 }
+    ],
+    plats: ['PyTorch', 'TensorFlow', 'CUDA', 'Hugging Face', 'LangChain', 'OpenAI / Claude API', 'Jupyter', 'Docker / WSL2'],
+    lm: [
+      { id: 'llama', label: 'Llama 3 8B', q4: 5.5, q8: 9.0 },
+      { id: 'qwen', label: 'Qwen 7B', q4: 5.0, q8: 8.4 },
+      { id: 'mistral', label: 'Mistral 7B', q4: 4.8, q8: 8.0 },
+      { id: 'gemma', label: 'Gemma', q4: 6.0, q8: 10.2 }
+    ],
+    fps: [30, 60, 120, 144],
+    budgets: [{ v: 45000, l: '≤ NT$45K' }, { v: 55000, l: '≤ NT$55K' }, { v: 65000, l: '≤ NT$65K' }, { v: 80000, l: '≤ NT$80K' }],
+    budgetsUsd: [{ v: 1400, l: '≤ $1,400' }, { v: 1700, l: '≤ $1,700' }, { v: 2000, l: '≤ $2,000' }, { v: 2500, l: '≤ $2,500' }],
+    screens: [14, 16, 18]
+  };
+  static ZH = {
+    crumbReq: '// 需求圖 REQUIREMENTS →', result: '推薦結果 RESULT', retake: '重新填寫 RETAKE', answers: '// 你的需求 YOUR ANSWERS', clickRerank: '點選即重新排名 · Click to re-rank',
+    nightGroup: '夜間 NIGHT · 3D 遊戲', dayGroup: '日間 DAY · AI 開發', q1: '01 // 遊戲 GAMES', q2: '02 // 最低 FPS', q3: '03 // 平台 PLATFORM', q4: '04 // 本機 LOCAL AI', budget: '預算 BUDGET', screen: '尺寸 SCREEN SIZE',
+    cands: '// 4 台候選 CANDIDATES · 依匹配度排序', pickRig: '選你的機台 Pick your rig', pass: '達標', part: '部分', fail: '未達', drivenBy: '需求來源 DRIVEN BY', nS: '夜', dS: '日', gS: '共',
+    secNight: '// 夜間 NIGHT · 3D 遊戲', secDay: '// 日間 DAY · AI 開發', secGen: '// 共通 GENERAL · 預算 · 尺寸', selected: '已選 SELECTED', fullSpecs: '查看規格 FULL SPECS', addCart: '加入購物車 ADD TO CART',
+    resultEyebrow: '// 推薦結果 RESULT', switchShift: '切換班別 SWITCH SHIFT', dayShiftEyebrow: '// 日間班 DAY SHIFT · AI 開發', nightShiftEyebrow: '// 夜間班 NIGHT SHIFT · 3D 遊戲', dawn: '晨曦執政官', reaper: '暗夜死神',
+    match: '總匹配 MATCH', dayFit: '日間適配 DAY FIT', nightFit: '夜間適配 NIGHT FIT', fpsEyebrow: '01 · 02 // 預估 FPS ESTIMATED', fpsTitle: '2.5K · 高畫質 HIGH', target: '目標 TARGET', noGames: '選擇遊戲以預估 FPS · Pick games to estimate FPS',
+    vramEyebrow: '04 // 本機 AI · VRAM', vramTitle: '小型開源模型能不能跑？', runtime: '執行環境 RUNTIME · Ollama / LM Studio', noLocal: '改用雲端 API — VRAM 不是關鍵 · Cloud API, VRAM is not the constraint', selectRig: '選這台 SELECT RIG',
+    balance: '權衡 BALANCE', twoShifts: '// 兩個班，一台機 TWO SHIFTS, ONE RIG', whichShift: '你更看重哪一班？', priority: '優先權重 PRIORITY', leanDay: '← 偏重 AI 開發 DAY', leanNight: 'NIGHT 偏重 3D 遊戲 →', budgetCap: '預算上限 BUDGET',
+    clickTwo: '點選機台釘選比較 · CLICK TWO RIGS TO COMPARE', pickOne: '再選一台 · Pick one more', picked: '已選',
+    yes: '是 YES · 本機', no: '否 NO · 雲端 API', overSuffix: ' 超出預算', sel: '已選 SELECTED', choose: '選擇 SELECT', gpuSub: '顯示卡', fpsSub: '預估 FPS', engineCap: '引擎上限 engine cap', screenL: '螢幕', targetW: '目標 ',
+    vramSub: '顯示記憶體', q8fits: 'Q8 可跑 ', q8ok: 'Q8 可跑', q4only: '僅 Q4 only', need: '需 ', q8need: 'Q8 需 ', short: '不足', localInf: '本機推論', cpuSub: '處理器', cores: ' 核心 cores', ramSub: '記憶體', rec32: '建議 32GB', storage: '儲存',
+    sizeL: '尺寸', priceL: '價格', overP: '超出 +', inBudget: '預算內 in budget', shiftDay: '日間 DAY', shiftDaySub: '晨曦執政官 · AI 開發', shiftNight: '夜間 NIGHT', shiftNightSub: '暗夜死神 · 3D 遊戲', coreShort: '核',
+    display: '螢幕 DISPLAY', weight: '重量 WEIGHT', gamesPass: ' 款達標', capNote: '引擎上限 ENGINE CAP 60', atTarget: '達標 AT TARGET', below: '未達 BELOW TARGET', q4o: '僅 Q4', ramHint: 'Docker / 本機 AI 建議 32GB', ssdSub: '模型 + 資料集',
+    overB: '超出預算 +', inB: '預算內 IN BUDGET', altDay: '看日間班 DAY SHIFT', altNight: '看夜間班 NIGHT SHIFT', overC: ' · 超出 +', inC: ' · 預算內', gamesGe: ' 款 ≥ ', price: '價格 PRICE',
+    hz: (hz, ok, f) => '螢幕 ' + hz + 'Hz ' + (ok ? '≥' : '<') + ' 目標 ' + f + ' FPS · Display refresh ' + (ok ? 'covers' : 'below') + ' target'
+  };
+  static EN = {
+    crumbReq: '// REQUIREMENTS →', result: 'RESULT', retake: 'RETAKE', answers: '// YOUR ANSWERS', clickRerank: 'Click any answer to re-rank',
+    nightGroup: 'NIGHT · 3D GAMING', dayGroup: 'DAY · AI DEV', q1: '01 // GAMES', q2: '02 // MIN FPS', q3: '03 // PLATFORM', q4: '04 // LOCAL AI', budget: 'BUDGET', screen: 'SCREEN SIZE',
+    cands: '// 4 CANDIDATES · SORTED BY MATCH', pickRig: 'Pick your rig', pass: 'Pass', part: 'Partial', fail: 'Miss', drivenBy: 'DRIVEN BY', nS: 'N', dS: 'D', gS: 'G',
+    secNight: '// NIGHT · 3D GAMING', secDay: '// DAY · AI DEV', secGen: '// GENERAL · BUDGET · SIZE', selected: 'SELECTED', fullSpecs: 'FULL SPECS', addCart: 'ADD TO CART',
+    resultEyebrow: '// RESULT', switchShift: 'SWITCH SHIFT', dayShiftEyebrow: '// DAY SHIFT · AI DEV', nightShiftEyebrow: '// NIGHT SHIFT · 3D GAMING', dawn: 'DAWN ARCHON', reaper: 'REAPER',
+    match: 'MATCH', dayFit: 'DAY FIT', nightFit: 'NIGHT FIT', fpsEyebrow: '01 · 02 // ESTIMATED FPS', fpsTitle: '2.5K · HIGH PRESET', target: 'TARGET', noGames: 'Pick games to estimate FPS',
+    vramEyebrow: '04 // LOCAL AI · VRAM', vramTitle: 'Can it run small open models?', runtime: 'RUNTIME · Ollama / LM Studio', noLocal: 'Cloud API selected. VRAM is not the constraint.', selectRig: 'SELECT RIG',
+    balance: 'BALANCE', twoShifts: '// TWO SHIFTS, ONE RIG', whichShift: 'WHICH SHIFT MATTERS MORE?', priority: 'PRIORITY', leanDay: '← LEAN AI DEV', leanNight: 'LEAN 3D GAMING →', budgetCap: 'BUDGET CAP',
+    clickTwo: 'CLICK TWO RIGS TO COMPARE', pickOne: 'Pick one more', picked: 'Selected',
+    yes: 'YES · LOCAL', no: 'NO · CLOUD API', overSuffix: ' over budget', sel: 'SELECTED', choose: 'SELECT', gpuSub: 'GRAPHICS', fpsSub: 'EST. FPS', engineCap: 'engine cap', screenL: 'Display', targetW: 'target ',
+    vramSub: 'VIDEO MEMORY', q8fits: 'Q8 fits ', q8ok: 'Q8 fits', q4only: 'Q4 only', need: 'needs ', q8need: 'Q8 needs ', short: 'Too small', localInf: 'LOCAL INFERENCE', cpuSub: 'PROCESSOR', cores: ' cores', ramSub: 'MEMORY', rec32: '32GB recommended', storage: 'STORAGE',
+    sizeL: 'Size', priceL: 'Price', overP: 'Over by +', inBudget: 'In budget', shiftDay: 'DAY', shiftDaySub: 'DAWN ARCHON · AI DEV', shiftNight: 'NIGHT', shiftNightSub: 'REAPER · 3D GAMING', coreShort: 'C',
+    display: 'DISPLAY', weight: 'WEIGHT', gamesPass: ' games at target', capNote: 'ENGINE CAP 60', atTarget: 'AT TARGET', below: 'BELOW TARGET', q4o: 'Q4 only', ramHint: '32GB recommended for Docker / local AI', ssdSub: 'Models + datasets',
+    overB: 'Over budget +', inB: 'IN BUDGET', altDay: 'DAY SHIFT', altNight: 'NIGHT SHIFT', overC: ' · over +', inC: ' · in budget', gamesGe: ' games ≥ ', price: 'PRICE',
+    hz: (hz, ok, f) => 'Display ' + hz + 'Hz ' + (ok ? '≥' : '<') + ' target ' + f + ' FPS'
+  };
+  static INIT = { games: ['cp', 'er', 'bm', 'cs'], fps: 60, plats: ['PyTorch', 'CUDA', 'Hugging Face', 'Docker / WSL2'], local: true, lm: ['llama', 'qwen'], budget: 55000, budgetUsd: 1700, screens: [16], aSel: null, bMode: 'night', bModel: null, wDay: 50, pick: ['a16', 'a18'] };
+  state = { ...Component.INIT, lang: 'zh' };
+  reset = () => this.setState({ ...Component.INIT });
+  tog(k, v) { this.setState(s => ({ [k]: s[k].includes(v) ? s[k].filter(x => x !== v) : [...s[k], v] })); }
+  en() { return this.state.lang === 'en'; }
+  fmt(n) { return (this.en() ? '$' : 'NT$') + n.toLocaleString('en-US'); }
+  pr(m) { return this.en() ? m.usd : m.price; }
+  bud() { return this.en() ? this.state.budgetUsd : this.state.budget; }
+  gl(g) { return this.en() && g.en ? g.en : g.label; }
+  lt(sel) { return sel ? { color: 'var(--hazard-700)', borderColor: 'var(--hazard-700)', background: 'var(--hazard-50)' } : { color: 'var(--graphite-700)', borderColor: 'var(--steel-300)', background: 'transparent' }; }
+  tag(label, sel, onClick, light) { return { label, props: { selected: sel, onClick, style: light ? this.lt(sel) : undefined } }; }
+  score(m, w) {
+    const s = this.state, D = Component.D;
+    const games = D.games.filter(g => s.games.includes(g.id));
+    const fps = games.map(g => { const raw = g.base * m.idx; const v = Math.round(Math.min(g.cap || 9999, raw)); return { g, v, capped: !!g.cap && raw >= g.cap, pass: v >= s.fps }; });
+    const passN = fps.filter(f => f.pass).length;
+    const hzOk = m.hz >= s.fps;
+    const night = (games.length ? passN / games.length : 1) * .85 + (hzOk ? .15 : 0);
+    const lms = s.local ? D.lm.filter(l => s.lm.includes(l.id)) : [];
+    const q8n = lms.filter(l => m.vram >= l.q8).length, q4n = lms.filter(l => m.vram >= l.q4).length;
+    const vramS = lms.length ? (q4n / lms.length) * .5 + (q8n / lms.length) * .5 : (m.vram >= 8 ? 1 : .8);
+    const needRam = s.local || s.plats.includes('Docker / WSL2');
+    const ramOk = m.ram >= 32 || !needRam, coreOk = m.cores >= 16 || s.plats.length < 4;
+    const day = .5 * vramS + .3 * (ramOk ? 1 : .5) + .2 * (coreOk ? 1 : .7);
+    const budget = this.bud(), price = this.pr(m);
+    const over = price - budget, bFit = over <= 0 ? 1 : Math.max(0, 1 - over / (budget * .27));
+    const scOk = !s.screens.length || s.screens.includes(m.screen);
+    const match = (w * day + (1 - w) * night) * (.7 + .3 * bFit) * (.8 + .2 * (scOk ? 1 : .6));
+    return { m, price, fps, passN, nGames: games.length, hzOk, night, day, lms, q8n, q4n, ramOk, coreOk, needRam, over, scOk, match };
+  }
+  ranked(w) { return Component.D.models.map(m => this.score(m, w)).sort((a, b) => b.match - a.match); }
+  renderVals() {
+    const s = this.state, D = Component.D, en = this.en(), L = en ? Component.EN : Component.ZH, fmt = n => this.fmt(n), pct = x => Math.round(x * 100);
+    const selGames = D.games.filter(g => s.games.includes(g.id));
+    const selLm = s.local ? D.lm.filter(l => s.lm.includes(l.id)) : [];
+    const langOpts = [{ label: '中文 · NT$', k: 'zh' }, { label: 'EN · USD', k: 'en' }].map(o => { const on = s.lang === o.k; return { label: o.label, bg: on ? '#f97400' : 'transparent', fg: on ? '#0a0a0b' : '#c6c2c5', go: () => this.setState({ lang: o.k }) }; });
+    const gameTags = D.games.map(g => this.tag(this.gl(g), s.games.includes(g.id), () => this.tog('games', g.id)));
+    const fpsTags = D.fps.map(f => this.tag(f + ' FPS', s.fps === f, () => this.setState({ fps: f })));
+    const platTagsL = D.plats.map(p => this.tag(p, s.plats.includes(p), () => this.tog('plats', p), true));
+    const localTagsL = [this.tag(L.yes, s.local, () => this.setState({ local: true }), true), this.tag(L.no, !s.local, () => this.setState({ local: false }), true)];
+    const lmTagsL = D.lm.map(l => this.tag(l.label, s.lm.includes(l.id), () => this.tog('lm', l.id), true));
+    const bk = en ? 'budgetUsd' : 'budget', bud = this.bud();
+    const budgetTags = (en ? D.budgetsUsd : D.budgets).map(b => this.tag(b.l, bud === b.v, () => this.setState({ [bk]: b.v })));
+    const screenTags = D.screens.map(n => this.tag(n + '″', s.screens.includes(n), () => this.tog('screens', n)));
+
+    // 1a
+    const A = this.ranked(.5);
+    const aSel = s.aSel || A[0].m.id, selIdx = A.findIndex(c => c.m.id === aSel), aS = A[selIdx];
+    const aCols = A.map((c, i) => {
+      const sel = i === selIdx, pick = () => this.setState({ aSel: c.m.id });
+      return { name: c.m.name, rank: '#0' + (i + 1), top: i === 0, price: fmt(c.price), over: c.over > 0, overText: '+' + fmt(c.over) + L.overSuffix, pct: pct(c.match), barW: pct(c.match) + '%', pick, headBd: sel ? 'var(--hazard-500)' : 'var(--graphite-700)', headTop: sel ? 'var(--hazard-500)' : 'transparent', pctCol: sel ? 'var(--hazard-500)' : 'var(--fg-1)', btn: { variant: sel ? 'primary' : 'outline', size: 'sm', fullWidth: true, onClick: pick }, btnLabel: sel ? L.sel : L.choose };
+    });
+    const mk = { pass: ['var(--signal-green)', 'var(--signal-green)'], fail: ['transparent', 'var(--signal-red)'], part: ['transparent', 'var(--hazard-500)'] };
+    const cell = (i, r) => { const k = mk[r[2]] || ['transparent', 'transparent']; return { text: r[0], sub: r[1] || '', mkBg: k[0], mkBd: k[1], selBg: i === selIdx ? 'rgba(249,116,0,.08)' : 'transparent' }; };
+    const T = a => a.map(t => ({ t }));
+    const row = (label, sub, n, d, fn) => ({ label, sub, n: T(n), d: T(d), cells: A.map((c, i) => cell(i, fn(c))) });
+    const aNight = [
+      row('GPU', L.gpuSub, ['01', '02'], ['04'], c => [c.m.gpu, c.m.tgp + ' TGP']),
+      ...selGames.map(g => row(this.gl(g), L.fpsSub, ['01', '02'], [], c => { const f = c.fps.find(f => f.g.id === g.id); return [f.v + ' FPS', f.capped ? L.engineCap : '', f.pass ? 'pass' : 'fail']; })),
+      row(L.screenL, 'REFRESH', ['02'], [], c => [c.m.panel, (c.hzOk ? '≥ ' : '< ') + L.targetW + s.fps + ' FPS', c.hzOk ? 'pass' : 'fail'])
+    ];
+    const aDay = [
+      row('VRAM', L.vramSub, ['01'], ['04'], c => [c.m.vram + 'GB', c.lms.length ? L.q8fits + c.q8n + '/' + c.lms.length : '', c.lms.length ? (c.q8n === c.lms.length ? 'pass' : 'part') : null]),
+      ...selLm.map(l => row(l.label, L.localInf, [], ['04'], c => c.m.vram >= l.q8 ? [L.q8ok, L.need + l.q8 + 'GB', 'pass'] : c.m.vram >= l.q4 ? [L.q4only, L.q8need + l.q8 + 'GB', 'part'] : [L.short, L.need + l.q4 + 'GB', 'fail'])),
+      row('CPU', L.cpuSub, [], ['03', '04'], c => [c.m.cpu, c.m.cores + L.cores, c.coreOk ? 'pass' : 'fail']),
+      row('RAM', L.ramSub, [], ['03', '04'], c => [c.m.ram + 'GB DDR5', c.ramOk ? '' : L.rec32, c.ramOk ? 'pass' : 'fail']),
+      row('SSD', L.storage, [], ['03'], c => [c.m.ssd + ' PCIe 4.0', '', null])
+    ];
+    const aGen = [
+      row(L.sizeL, 'SIZE · WEIGHT', [], [], c => [c.m.screen + '″ · ' + c.m.weight + 'kg', '', c.scOk ? 'pass' : 'fail']),
+      row(L.priceL, 'PRICE', [], [], c => [fmt(c.price), c.over > 0 ? L.overP + fmt(c.over) : L.inBudget, c.over > 0 ? 'fail' : 'pass'])
+    ];
+
+    // 1b
+    const night = s.bMode === 'night';
+    const B = A.find(c => c.m.id === (s.bModel || A[0].m.id));
+    const th = night
+      ? { bg: 'var(--graphite-950)', panel: 'var(--graphite-900)', bd: 'var(--graphite-700)', fg: 'var(--fg-1)', sub: 'var(--fg-2)', mute: 'var(--fg-3)', acc: 'var(--hazard-500)', stage: 'radial-gradient(ellipse at 50% 58%,var(--graphite-700),var(--graphite-900) 68%)' }
+      : { bg: 'var(--steel-50)', panel: 'var(--steel-0)', bd: 'var(--steel-150)', fg: 'var(--graphite-950)', sub: 'var(--graphite-600)', mute: 'var(--graphite-500)', acc: 'var(--hazard-700)', stage: 'radial-gradient(ellipse at 50% 58%,var(--steel-0),var(--steel-150) 70%)' };
+    const maxF = 160, vMax = 16;
+    const b = {
+      ...th, isNight: night, isDay: !night,
+      shifts: [{ label: L.shiftDay, sub: L.shiftDaySub, on: !night, mode: 'day' }, { label: L.shiftNight, sub: L.shiftNightSub, on: night, mode: 'night' }].map(x => ({ ...x, bg: x.on ? 'var(--hazard-500)' : 'transparent', fg: x.on ? 'var(--graphite-950)' : th.sub, go: () => this.setState({ bMode: x.mode }) })),
+      rail: A.map((c, i) => { const on = c === B; return { rank: '#0' + (i + 1), name: c.m.name, pct: pct(c.match) + '%', price: fmt(c.price), bg: on ? th.panel : th.bg, top: on ? th.acc : 'transparent', fg: on ? th.fg : th.mute, go: () => this.setState({ bModel: c.m.id }) }; }),
+      name: B.m.name, match: pct(B.match), dayPct: pct(B.day), nightPct: pct(B.night),
+      dayCol: night ? th.fg : th.acc, nightCol: night ? th.acc : th.fg,
+      stats: [{ k: 'GPU', v: 'NVIDIA ' + B.m.gpu + ' · ' + B.m.vram + 'GB' }, { k: 'CPU', v: B.m.cpu + ' · ' + B.m.cores + L.coreShort }, { k: L.display, v: B.m.screen + '″ ' + B.m.panel }, { k: 'RAM / SSD', v: B.m.ram + 'GB · ' + B.m.ssd }, { k: L.weight, v: B.m.weight + ' kg' }],
+      pass: B.passN + '/' + B.nGames + L.gamesPass,
+      fps: s.fps, tLeft: (s.fps / maxF * 100) + '%', hasGames: B.nGames > 0, noGames: B.nGames === 0,
+      bars: B.fps.map(f => ({ label: this.gl(f.g), v: f.v, w: Math.min(100, f.v / maxF * 100) + '%', col: f.pass ? 'var(--hazard-500)' : 'var(--graphite-500)', note: f.capped ? L.capNote : (f.pass ? L.atTarget : L.below), noteCol: f.pass ? 'var(--fg-3)' : 'var(--signal-red)' })),
+      hzText: L.hz(B.m.hz, B.hzOk, s.fps),
+      hzBg: B.hzOk ? 'var(--signal-green)' : 'transparent', hzBd: B.hzOk ? 'var(--signal-green)' : 'var(--signal-red)',
+      vram: B.m.vram, capLeft: (B.m.vram / vMax * 100) + '%', noLocal: !s.local,
+      lm: B.lms.map(l => { const q8 = B.m.vram >= l.q8, q4 = B.m.vram >= l.q4; return { label: l.label, q4w: (l.q4 / vMax * 100) + '%', q8w: (l.q8 / vMax * 100) + '%', q4: 'Q4 ' + l.q4 + 'GB', q8: 'Q8 ' + l.q8 + 'GB', status: q8 ? L.q8ok : q4 ? L.q4o : L.short, stCol: q8 ? 'var(--graphite-950)' : q4 ? 'var(--hazard-700)' : 'var(--signal-red)' }; }),
+      checks: [
+        { k: 'CPU', v: B.m.cpu, sub: B.m.cores + L.cores, ok: B.coreOk },
+        { k: 'RAM', v: B.m.ram + 'GB DDR5', sub: B.needRam ? L.ramHint : '', ok: B.ramOk },
+        { k: 'SSD', v: B.m.ssd + ' PCIe 4.0', sub: L.ssdSub, ok: true },
+        { k: 'CUDA', v: 'NVIDIA ' + B.m.gpu, sub: 'PyTorch / TensorFlow', ok: true }
+      ].map(x => ({ ...x, mkBg: x.ok ? 'var(--signal-green)' : 'transparent', mkBd: x.ok ? 'var(--signal-green)' : 'var(--signal-red)' })),
+      price: fmt(B.price), overText: B.over > 0 ? L.overB + fmt(B.over) : L.inB, overCol: B.over > 0 ? 'var(--signal-red)' : th.mute,
+      altBtn: { variant: 'outline', size: 'lg', onClick: () => this.setState({ bMode: night ? 'day' : 'night' }), style: night ? undefined : { color: 'var(--graphite-950)', borderColor: 'var(--graphite-500)' } },
+      altLabel: night ? L.altDay : L.altNight
+    };
+
+    // 1c
+    const w = s.wDay / 100, C = this.ranked(w), maxBar = 460, fD = Math.min(1, 2 * w), fN = Math.min(1, 2 * (1 - w));
+    const cRows = D.models.map(m => {
+      const c = C.find(x => x.m.id === m.id), r = C.indexOf(c), pi = s.pick.indexOf(m.id), picked = pi >= 0;
+      return {
+        top: r * 104 + 'px', rank: '#0' + (r + 1), pickTag: picked ? '· ' + (pi === 0 ? 'A' : 'B') : '', name: m.name, pct: pct(c.match),
+        priceLine: c.over > 0 ? fmt(c.price) + L.overC + fmt(c.over) : fmt(c.price) + L.inC,
+        priceCol: picked ? 'var(--graphite-900)' : c.over > 0 ? 'var(--signal-red)' : 'var(--fg-3)',
+        dayTrackW: Math.round(c.day * maxBar) + 'px', dayW: Math.round(c.day * fD * maxBar) + 'px',
+        nightTrackW: Math.round(c.night * maxBar) + 'px', nightW: Math.round(c.night * fN * maxBar) + 'px',
+        dayLabel: 'DAY ' + pct(c.day) + ' · VRAM ' + m.vram + 'GB · RAM ' + m.ram + 'GB · ' + m.cores + 'C',
+        nightLabel: 'NIGHT ' + pct(c.night) + ' · ' + m.gpu + ' · ' + c.passN + '/' + c.nGames + L.gamesGe + s.fps + ' FPS',
+        pillBg: picked ? 'var(--hazard-500)' : 'var(--graphite-950)', pillFg: picked ? 'var(--graphite-950)' : 'var(--fg-1)', pillBd: picked ? 'var(--hazard-500)' : 'var(--graphite-600)',
+        go: () => this.setState(st => ({ pick: st.pick.includes(m.id) ? st.pick.filter(x => x !== m.id) : [...st.pick, m.id].slice(-2) }))
+      };
+    });
+    let cDiff = [], cAName = '', cBName = '';
+    if (s.pick.length === 2) {
+      const [ma, mb] = s.pick.map(id => D.models.find(m => m.id === id));
+      cAName = ma.name; cBName = mb.name;
+      cDiff = [
+        ['GPU', m => m.gpu + ' · ' + m.tgp, m => m.idx, 1], ['VRAM', m => m.vram + 'GB', m => m.vram, 1], ['CPU', m => m.cpu + ' · ' + m.cores + 'C', m => m.cores, 1],
+        ['RAM', m => m.ram + 'GB', m => m.ram, 1], ['SSD', m => m.ssd, m => parseInt(m.ssd), 1], [L.display, m => m.screen + '″ ' + m.panel, m => m.hz, 1],
+        [L.weight, m => m.weight + ' kg', m => m.weight, -1], [L.price, m => fmt(this.pr(m)), m => this.pr(m), -1]
+      ].map(([k, f, v, dir]) => { const a = v(ma) * dir, bb = v(mb) * dir; return { k, a: f(ma), b: f(mb), aMk: a > bb ? 'var(--hazard-700)' : 'transparent', bMk: bb > a ? 'var(--hazard-500)' : 'transparent', op: a === bb && f(ma) === f(mb) ? '.45' : '1' }; });
+    }
+
+    return {
+      L, langOpts, reset: this.reset, gameTags, fpsTags, platTagsL, localTagsL, lmTagsL, budgetTags, screenTags, showLm: s.local,
+      aCols, aNight, aDay, aGen, aSelName: aS.m.name, aSelPrice: fmt(aS.price),
+      b,
+      cWDay: s.wDay, cWNight: 100 - s.wDay, cOnW: e => this.setState({ wDay: +e.target.value }),
+      cBudget: bud, cBudgetText: fmt(bud), cOnB: e => this.setState({ [bk]: +e.target.value }),
+      cMin: en ? 1000 : 35000, cMax: en ? 2600 : 80000, cStep: en ? 50 : 1000,
+      cRows, cDiff, cAName, cBName, cHasDiff: s.pick.length === 2, cNoDiff: s.pick.length !== 2, cPickCount: s.pick.length
+    };
+  }
+}
+</script>
+</body>
+</html>
